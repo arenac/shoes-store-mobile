@@ -2,16 +2,16 @@ import React from 'react';
 
 import { View, Text } from 'react-native';
 
-const Main = () => {
+const Home = () => {
   return (
     <View>
-      <Text>Main</Text>
+      <Text>Home</Text>
     </View>
   );
 };
 
-Main.navigationOptions = {
+Home.navigationOptions = {
   title: 'Shoes Store',
 };
 
-export default Main;
+export default Home;
