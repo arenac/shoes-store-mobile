@@ -1,23 +1,41 @@
+import React from 'react';
 import { createAppContainer } from 'react-navigation';
-import { createStackNavigator } from 'react-navigation-stack';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import Main from './screens/Main';
+import Home from './screens/Home';
 import Cart from './screens/Cart';
 
+import CartIcon from './components/CartIcon';
+
+const getTabBarIcon = (navigation, focused, tintColor) => {
+  const { routeName } = navigation.state;
+  let IconComponent = Icon;
+  let iconName;
+  if (routeName === 'Home') {
+    iconName = 'home';
+  } else if (routeName === 'Cart') {
+    IconComponent = CartIcon;
+    iconName = 'shopping-cart';
+  }
+
+  return <IconComponent name={iconName} size={25} color={tintColor} />;
+};
+
 const Routes = createAppContainer(
-  createStackNavigator(
+  createBottomTabNavigator(
     {
-      Main,
+      Home,
       Cart,
     },
     {
-      headerLayoutPreset: 'center',
-      headerBackTitleVisible: false,
-      defaultNavigationOptions: {
-        headerStyle: {
-          backgroundColor: '#123456',
-        },
-        headerTintColor: '#fff',
+      defaultNavigationOptions: ({ navigation }) => ({
+        tabBarIcon: ({ focused, tintColor }) =>
+          getTabBarIcon(navigation, focused, tintColor),
+      }),
+      tabBarOptions: {
+        activeTintColor: '#6C6C6C',
+        inactiveTintColor: '#B6B1B1',
       },
     }
   )
