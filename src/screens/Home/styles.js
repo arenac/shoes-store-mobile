@@ -1,9 +1,7 @@
 import styled from 'styled-components/native';
-import { RectButton } from 'react-native-gesture-handler';
 import { darken } from 'polished';
 
 export const Container = styled.View`
-  flex: 1;
   padding: 30px;
   background: #fff;
 `;
@@ -15,11 +13,9 @@ export const List = styled.FlatList.attrs({
 `;
 
 export const Product = styled.View`
-  justify-content: flex-start;
-  align-content: center;
   width: 260px;
-  height: 300px;
-  margin: 30px 10px;
+  padding: 10px;
+  margin: 15px;
   border-radius: 4px;
   border: 1px solid #d2d3d3;
   background: #dcdcdc;
@@ -48,14 +44,13 @@ export const Title = styled.Text`
 export const Price = styled.Text`
   font-size: 21px;
   font-weight: bold;
-  margin: 20px 0 20px;
+  margin-top: 10px;
 `;
 
-export const AddButton = styled(RectButton)`
+export const AddButton = styled.TouchableOpacity`
   flex-direction: row;
   align-items: center;
   background: #3598c2;
-  border: 0;
   border-radius: 4px;
   margin-top: auto;
 `;
@@ -65,8 +60,8 @@ export const ProductAmount = styled.View`
   align-items: center;
   padding: 12px;
   background: ${darken(0.03, '#3598C2')};
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
+  border-top-left-radius: 4px;
+  border-bottom-left-radius: 4px;
 `;
 
 export const ProductAmountText = styled.Text`
