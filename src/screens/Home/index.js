@@ -17,6 +17,8 @@ import {
   AddButtonText,
 } from './styles';
 
+import { formatPrice } from '../../utils/format';
+
 const Home = () => {
   const products = [
     {
@@ -78,7 +80,7 @@ const Home = () => {
                   uri: String(item.image),
                 }}
               />
-              <Price>{item.price}</Price>
+              <Price>{formatPrice(item.price)}</Price>
             </Header>
             <AddButton onPress={() => {}}>
               <ProductAmount>
