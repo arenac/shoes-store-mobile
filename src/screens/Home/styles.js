@@ -21,7 +21,8 @@ export const Product = styled.View`
   height: 300px;
   margin: 30px 10px;
   border-radius: 4px;
-  border: 1px solid #eee;
+  border: 1px solid #d2d3d3;
+  background: #dcdcdc;
 `;
 
 export const Header = styled.View`
@@ -47,13 +48,13 @@ export const Title = styled.Text`
 export const Price = styled.Text`
   font-size: 21px;
   font-weight: bold;
-  margin: 5px 0 20px;
+  margin: 20px 0 20px;
 `;
 
 export const AddButton = styled(RectButton)`
   flex-direction: row;
   align-items: center;
-  background: #7159c1;
+  background: #3598c2;
   border: 0;
   border-radius: 4px;
   margin-top: auto;
@@ -63,7 +64,9 @@ export const ProductAmount = styled.View`
   flex-direction: row;
   align-items: center;
   padding: 12px;
-  background: ${darken(0.03, '#7159c1')};
+  background: ${darken(0.03, '#3598C2')};
+  border-top-right-radius: 4px;
+  border-bottom-right-radius: 4px;
 `;
 
 export const ProductAmountText = styled.Text`
