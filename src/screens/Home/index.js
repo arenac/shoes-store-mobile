@@ -11,10 +11,10 @@ import {
   ProductImage,
   Title,
   Price,
-  ProductButton,
-  ButtonIconContainer,
-  ProductButtonAdded,
-  ProductButtonText,
+  AddButton,
+  ProductAmount,
+  ProductAmountText,
+  AddButtonText,
 } from './styles';
 
 const Home = () => {
@@ -80,13 +80,13 @@ const Home = () => {
               />
               <Price>{item.price}</Price>
             </Header>
-            <ProductButton onPress={() => {}}>
-              <ButtonIconContainer>
-                <Icon name="add_shopping_card" size={25} />
-                <ProductButtonAdded>1</ProductButtonAdded>
-              </ButtonIconContainer>
-              <ProductButtonText>ADD TO CART</ProductButtonText>
-            </ProductButton>
+            <AddButton onPress={() => {}}>
+              <ProductAmount>
+                <Icon name="add-shopping-cart" size={20} color="#fff" />
+                <ProductAmountText>1</ProductAmountText>
+              </ProductAmount>
+              <AddButtonText>ADD TO CART</AddButtonText>
+            </AddButton>
           </Product>
         )}
       />
