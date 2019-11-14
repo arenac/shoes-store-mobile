@@ -1,4 +1,6 @@
 import React from 'react';
+import { connect } from 'react-redux';
+
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import {
@@ -26,16 +28,15 @@ import {
 
 import { formatPrice } from '../../utils/format';
 
-const Cart = () => {
-  const products = [];
+const Cart = ({ cart }) => {
   return (
     <Container>
-      {products.length > 0 ? (
+      {cart.length > 0 ? (
         <>
           <Products>
-            {products.map(product => (
+            {cart.map(product => (
               <>
-                <Product key={product.id}>
+                <Product key={String(product.id)}>
                   <ProductImage
                     source={{
                       uri: String(product.image),
@@ -43,7 +44,7 @@ const Cart = () => {
                   />
                   <ProductInfo>
                     <Title>{product.title}</Title>
-                    <Price>{formatPrice(product.price)}</Price>
+                    <Price>{product.price}</Price>
                   </ProductInfo>
                   <DeleteProduct>
                     <Icon name="delete-forever" size={20} color="#6C6C6C" />
@@ -66,7 +67,7 @@ const Cart = () => {
                         />
                       </AddButton>
                     </ProductAmount>
-                    <Price>{formatPrice(1000)}</Price>
+                    <Price>{1000}</Price>
                   </SubTotal>
                 </Product>
               </>
@@ -74,7 +75,7 @@ const Cart = () => {
           </Products>
           <TotalContainer>
             <TotalText>TOTAL</TotalText>
-            <TotalValue>{formatPrice(1000)}</TotalValue>
+            <TotalValue>{1000}</TotalValue>
             <SendOrderButton>
               <SendOrderButtonText>SEND ORDER</SendOrderButtonText>
             </SendOrderButton>
@@ -94,4 +95,8 @@ Cart.navigationOptions = {
   title: 'Cart',
 };
 
-export default Cart;
+const mapStateToProps = state => ({
+  cart: state.cart,
+});
+
+export default connect(mapStateToProps)(Cart);

@@ -11,7 +11,10 @@ export const Products = styled.View``;
 
 export const Product = styled.View``;
 
-export const ProductImage = styled.Image``;
+export const ProductImage = styled.Image`
+  width: 80px;
+  height: 80px;
+`;
 
 export const ProductInfo = styled.View``;
 
@@ -19,17 +22,17 @@ export const Title = styled.Text``;
 
 export const Price = styled.Text``;
 
-export const DeleteProduct = styled.Button``;
+export const DeleteProduct = styled.View``;
 
-export const SubTotal = styled.Text``;
+export const SubTotal = styled.View``;
 
 export const ProductAmount = styled.View``;
 
-export const RemoveButton = styled.Button``;
+export const RemoveButton = styled.View``;
 
 export const ProductAmountTextInput = styled.TextInput``;
 
-export const AddButton = styled.Button``;
+export const AddButton = styled.View``;
 
 export const TotalContainer = styled.View``;
 

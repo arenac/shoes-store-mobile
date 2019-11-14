@@ -1,5 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import Icon from 'react-native-vector-icons/MaterialIcons';
+
+import * as CartActions from '../../store/modules/cart/actions';
 
 import {
   Container,
@@ -18,7 +22,7 @@ import {
 import api from '../../services/api';
 import { formatPrice } from '../../utils/format';
 
-const Home = () => {
+const Home = ({ addToCartRequest }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -32,6 +36,10 @@ const Home = () => {
     };
     fetchProducts();
   }, []);
+
+  const handleAddProduct = id => {
+    addToCartRequest(id);
+  };
 
   return (
     <Container>
@@ -50,7 +58,7 @@ const Home = () => {
               />
               <Price>{item.priceFormated}</Price>
             </Header>
-            <AddButton onPress={() => {}}>
+            <AddButton onPress={() => handleAddProduct(item)}>
               <ProductAmount>
                 <Icon name="add-shopping-cart" size={20} color="#fff" />
                 <ProductAmountText>1</ProductAmountText>
@@ -68,4 +76,7 @@ Home.navigationOptions = {
   title: 'Shoes Store',
 };
 
-export default Home;
+const mapDispatchToProps = dispatch =>
+  bindActionCreators(CartActions, dispatch);
+
+export default connect(null, mapDispatchToProps)(Home);
