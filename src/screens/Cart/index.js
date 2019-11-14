@@ -46,7 +46,7 @@ const Cart = () => {
                     <Price>{formatPrice(product.price)}</Price>
                   </ProductInfo>
                   <DeleteProduct>
-                    <Icon name="delete-forever" size={20} color="#fff" />
+                    <Icon name="delete-forever" size={20} color="#6C6C6C" />
                   </DeleteProduct>
                   <SubTotal>
                     <ProductAmount>
@@ -54,7 +54,7 @@ const Cart = () => {
                         <Icon
                           name="add-circle-outline"
                           size={20}
-                          color="#fff"
+                          color="#6C6C6C"
                         />
                       </RemoveButton>
                       <ProductAmountTextInput>1</ProductAmountTextInput>
@@ -62,7 +62,7 @@ const Cart = () => {
                         <Icon
                           name="remove-circle-outline"
                           size={20}
-                          color="#fff"
+                          color="#6C6C6C"
                         />
                       </AddButton>
                     </ProductAmount>
@@ -82,7 +82,7 @@ const Cart = () => {
         </>
       ) : (
         <EmptyCartContainer>
-          <Icon name="remove-shopping-cart" size={50} color="#000" />
+          <Icon name="remove-shopping-cart" size={50} color="#6C6C6C" />
           <EmptyCartText>Your shopping cart is empty</EmptyCartText>
         </EmptyCartContainer>
       )}
