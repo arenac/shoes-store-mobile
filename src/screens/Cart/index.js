@@ -30,9 +30,17 @@ import {
 
 import { formatPrice } from '../../utils/format';
 
-const Cart = ({ cart, total, removeFromCart }) => {
+const Cart = ({ cart, total, removeFromCart, updateAmount }) => {
   const handleDeleteProduct = id => {
     removeFromCart(id);
+  };
+
+  const increment = product => {
+    updateAmount(product.id, product.amount + 1);
+  };
+
+  const decrement = product => {
+    updateAmount(product.id, product.amount - 1);
   };
 
   return (
@@ -60,9 +68,9 @@ const Cart = ({ cart, total, removeFromCart }) => {
                     </DeleteProduct>
                   </ProductInfo>
                   <Control>
-                    <ControlButton>
+                    <ControlButton onPress={() => decrement(product)}>
                       <Icon
-                        name="add-circle-outline"
+                        name="remove-circle-outline"
                         size={20}
                         color="#6C6C6C"
                       />
@@ -70,9 +78,9 @@ const Cart = ({ cart, total, removeFromCart }) => {
                     <ProductAmountTextInput>
                       {product.amount}
                     </ProductAmountTextInput>
-                    <ControlButton>
+                    <ControlButton onPress={() => increment(product)}>
                       <Icon
-                        name="remove-circle-outline"
+                        name="add-circle-outline"
                         size={20}
                         color="#6C6C6C"
                       />
