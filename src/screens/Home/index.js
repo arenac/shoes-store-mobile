@@ -22,7 +22,7 @@ import {
 import api from '../../services/api';
 import { formatPrice } from '../../utils/format';
 
-const Home = ({ addToCartRequest }) => {
+const Home = ({ addToCartRequest, amount }) => {
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -61,7 +61,7 @@ const Home = ({ addToCartRequest }) => {
             <AddButton onPress={() => handleAddProduct(item)}>
               <ProductAmount>
                 <Icon name="add-shopping-cart" size={20} color="#fff" />
-                <ProductAmountText>1</ProductAmountText>
+                <ProductAmountText>{amount[item.id] || 0}</ProductAmountText>
               </ProductAmount>
               <AddButtonText>ADD TO CART</AddButtonText>
             </AddButton>
@@ -76,7 +76,14 @@ Home.navigationOptions = {
   title: 'Shoes Store',
 };
 
+const mapStateToProps = state => ({
+  amount: state.cart.reduce((amount, product) => {
+    amount[product.id] = product.amount;
+    return amount;
+  }, {}),
+});
+
 const mapDispatchToProps = dispatch =>
   bindActionCreators(CartActions, dispatch);
 
-export default connect(null, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(Home);

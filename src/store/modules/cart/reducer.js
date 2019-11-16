@@ -5,7 +5,7 @@ export default function cart(state = [], action) {
         ...state,
         {
           ...action.product,
-          ammout: 1,
+          amount: 1,
         },
       ];
     default:
