@@ -9,14 +9,13 @@ import {
   Product,
   ProductImage,
   ProductInfo,
+  ProductDetails,
   Title,
-  Price,
+  ProductSubtotal,
   DeleteProduct,
-  SubTotal,
-  ProductAmount,
-  RemoveButton,
+  Control,
+  ControlButton,
   ProductAmountTextInput,
-  AddButton,
   TotalContainer,
   TotalText,
   TotalValue,
@@ -37,38 +36,38 @@ const Cart = ({ cart }) => {
             {cart.map(product => (
               <>
                 <Product key={String(product.id)}>
-                  <ProductImage
-                    source={{
-                      uri: String(product.image),
-                    }}
-                  />
                   <ProductInfo>
-                    <Title>{product.title}</Title>
-                    <Price>{product.price}</Price>
+                    <ProductImage
+                      source={{
+                        uri: String(product.image),
+                      }}
+                    />
+                    <ProductDetails>
+                      <Title>{product.title}</Title>
+                      <ProductSubtotal>{product.price}</ProductSubtotal>
+                    </ProductDetails>
+                    <DeleteProduct>
+                      <Icon name="delete-forever" size={20} color="#6C6C6C" />
+                    </DeleteProduct>
                   </ProductInfo>
-                  <DeleteProduct>
-                    <Icon name="delete-forever" size={20} color="#6C6C6C" />
-                  </DeleteProduct>
-                  <SubTotal>
-                    <ProductAmount>
-                      <RemoveButton>
-                        <Icon
-                          name="add-circle-outline"
-                          size={20}
-                          color="#6C6C6C"
-                        />
-                      </RemoveButton>
-                      <ProductAmountTextInput>1</ProductAmountTextInput>
-                      <AddButton>
-                        <Icon
-                          name="remove-circle-outline"
-                          size={20}
-                          color="#6C6C6C"
-                        />
-                      </AddButton>
-                    </ProductAmount>
-                    <Price>{1000}</Price>
-                  </SubTotal>
+                  <Control>
+                    <ControlButton>
+                      <Icon
+                        name="add-circle-outline"
+                        size={20}
+                        color="#6C6C6C"
+                      />
+                    </ControlButton>
+                    <ProductAmountTextInput>1</ProductAmountTextInput>
+                    <ControlButton>
+                      <Icon
+                        name="remove-circle-outline"
+                        size={20}
+                        color="#6C6C6C"
+                      />
+                    </ControlButton>
+                    <ProductSubtotal>{1000}</ProductSubtotal>
+                  </Control>
                 </Product>
               </>
             ))}
@@ -83,7 +82,7 @@ const Cart = ({ cart }) => {
         </>
       ) : (
         <EmptyCartContainer>
-          <Icon name="remove-shopping-cart" size={50} color="#6C6C6C" />
+          <Icon name="remove-shopping-cart" size={100} color="#6C6C6C" />
           <EmptyCartText>Your shopping cart is empty</EmptyCartText>
         </EmptyCartContainer>
       )}
