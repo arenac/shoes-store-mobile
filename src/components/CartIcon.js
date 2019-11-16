@@ -1,14 +1,13 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const CartIcon = props => {
-  const badgeCount = 2;
-  const { name, color, size } = props;
+const CartIcon = ({ name, color, size, cartSize }) => {
   return (
     <View style={{ width: 24, height: 24, margin: 5 }}>
       <Icon name={name} size={size} color={color} />
-      {badgeCount > 0 && (
+      {cartSize > 0 && (
         <View
           style={{
             // /If you're using react-native < 0.57 overflow outside of the parent
@@ -25,7 +24,7 @@ const CartIcon = props => {
           }}
         >
           <Text style={{ color: 'white', fontSize: 10, fontWeight: 'bold' }}>
-            {badgeCount}
+            {cartSize}
           </Text>
         </View>
       )}
@@ -33,4 +32,8 @@ const CartIcon = props => {
   );
 };
 
-export default CartIcon;
+const mapStateToProps = state => ({
+  cartSize: state.cart.length,
+});
+
+export default connect(mapStateToProps)(CartIcon);
