@@ -44,7 +44,7 @@ const Cart = ({ cart }) => {
                     />
                     <ProductDetails>
                       <Title>{product.title}</Title>
-                      <ProductSubtotal>{product.price}</ProductSubtotal>
+                      <ProductSubtotal>{product.priceFormated}</ProductSubtotal>
                     </ProductDetails>
                     <DeleteProduct>
                       <Icon name="delete-forever" size={20} color="#6C6C6C" />
