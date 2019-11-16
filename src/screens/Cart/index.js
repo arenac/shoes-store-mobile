@@ -27,7 +27,7 @@ import {
 
 import { formatPrice } from '../../utils/format';
 
-const Cart = ({ cart }) => {
+const Cart = ({ cart, total }) => {
   return (
     <Container>
       {cart.length > 0 ? (
@@ -58,7 +58,9 @@ const Cart = ({ cart }) => {
                         color="#6C6C6C"
                       />
                     </ControlButton>
-                    <ProductAmountTextInput>1</ProductAmountTextInput>
+                    <ProductAmountTextInput>
+                      {product.amount}
+                    </ProductAmountTextInput>
                     <ControlButton>
                       <Icon
                         name="remove-circle-outline"
@@ -66,7 +68,7 @@ const Cart = ({ cart }) => {
                         color="#6C6C6C"
                       />
                     </ControlButton>
-                    <ProductSubtotal>{1000}</ProductSubtotal>
+                    <ProductSubtotal>{product.subtotal}</ProductSubtotal>
                   </Control>
                 </Product>
               </>
@@ -74,7 +76,7 @@ const Cart = ({ cart }) => {
           </Products>
           <TotalContainer>
             <TotalText>TOTAL</TotalText>
-            <TotalValue>{1000}</TotalValue>
+            <TotalValue>{total}</TotalValue>
             <SendOrderButton>
               <SendOrderButtonText>SEND ORDER</SendOrderButtonText>
             </SendOrderButton>
@@ -95,7 +97,15 @@ Cart.navigationOptions = {
 };
 
 const mapStateToProps = state => ({
-  cart: state.cart,
+  cart: state.cart.map(product => ({
+    ...product,
+    subtotal: formatPrice(product.price * product.amount),
+  })),
+  total: formatPrice(
+    state.cart.reduce((total, product) => {
+      return total + product.price * product.amount;
+    }, 0)
+  ),
 });
 
 export default connect(mapStateToProps)(Cart);
