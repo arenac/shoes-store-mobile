@@ -1,9 +1,10 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { View, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-const CartIcon = ({ name, color, size, cartSize }) => {
+export default function CartIcon({ name, color, size }) {
+  const cartSize = useSelector(state => state.cart.length);
   return (
     <View style={{ width: 24, height: 24, margin: 5 }}>
       <Icon name={name} size={size} color={color} />
@@ -30,10 +31,4 @@ const CartIcon = ({ name, color, size, cartSize }) => {
       )}
     </View>
   );
-};
-
-const mapStateToProps = state => ({
-  cartSize: state.cart.length,
-});
-
-export default connect(mapStateToProps)(CartIcon);
+}

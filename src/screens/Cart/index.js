@@ -1,10 +1,12 @@
 import React from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import Icon from 'react-native-vector-icons/MaterialIcons';
 
-import * as CartActions from '../../store/modules/cart/actions';
+import {
+  removeFromCart,
+  updateAmountRequest,
+} from '../../store/modules/cart/actions';
 
 import {
   Container,
@@ -30,17 +32,34 @@ import {
 
 import { formatPrice } from '../../utils/format';
 
-const Cart = ({ cart, total, removeFromCart, updateAmountRequest }) => {
+export default function Cart() {
+  const cart = useSelector(state =>
+    state.cart.map(product => ({
+      ...product,
+      subtotal: formatPrice(product.price * product.amount),
+    }))
+  );
+
+  const total = useSelector(state =>
+    formatPrice(
+      state.cart.reduce((oldTotal, product) => {
+        return oldTotal + product.price * product.amount;
+      }, 0)
+    )
+  );
+
+  const dispatch = useDispatch();
+
   const handleDeleteProduct = id => {
-    removeFromCart(id);
+    dispatch(removeFromCart(id));
   };
 
   const increment = product => {
-    updateAmountRequest(product.id, product.amount + 1);
+    dispatch(updateAmountRequest(product.id, product.amount + 1));
   };
 
   const decrement = product => {
-    updateAmountRequest(product.id, product.amount - 1);
+    dispatch(updateAmountRequest(product.id, product.amount - 1));
   };
 
   return (
@@ -109,25 +128,8 @@ const Cart = ({ cart, total, removeFromCart, updateAmountRequest }) => {
       )}
     </Container>
   );
-};
+}
 
 Cart.navigationOptions = {
   title: 'Cart',
 };
-
-const mapStateToProps = state => ({
-  cart: state.cart.map(product => ({
-    ...product,
-    subtotal: formatPrice(product.price * product.amount),
-  })),
-  total: formatPrice(
-    state.cart.reduce((total, product) => {
-      return total + product.price * product.amount;
-    }, 0)
-  ),
-});
-
-const mapDispatchToProps = dispatch =>
-  bindActionCreators(CartActions, dispatch);
-
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
