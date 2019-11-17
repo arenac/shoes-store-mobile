@@ -1,3 +1,4 @@
+import { Alert } from 'react-native';
 import { call, select, put, all, takeLatest } from 'redux-saga/effects';
 
 import api from '../../../services/api';
@@ -9,8 +10,18 @@ function* addToCart({ id }) {
     state.cart.find(p => p.id === id)
   );
 
+  const stock = yield call(api.get, `/stock/${id}`);
+
+  const stockAmount = stock.data.amount;
+  const currentAmount = productExists ? productExists.amount : 0;
+  const amount = currentAmount + 1;
+
+  if (amount > stockAmount) {
+    Alert.alert('Quanity requested not available!');
+    return;
+  }
+
   if (productExists) {
-    const amount = productExists.amount + 1;
     yield put(updateAmount(id, amount));
   } else {
     const response = yield call(api.get, `/products/${id}`);
