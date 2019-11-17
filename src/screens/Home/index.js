@@ -30,7 +30,7 @@ const Home = ({ addToCartRequest, amount }) => {
       const response = await api.get('products');
       const data = response.data.map(product => ({
         ...product,
-        priceFormated: formatPrice(product.price),
+        priceFormatted: formatPrice(product.price),
       }));
       setProducts(data);
     };
@@ -56,7 +56,7 @@ const Home = ({ addToCartRequest, amount }) => {
                   uri: String(item.image),
                 }}
               />
-              <Price>{item.priceFormated}</Price>
+              <Price>{item.priceFormatted}</Price>
             </Header>
             <AddButton onPress={() => handleAddProduct(item.id)}>
               <ProductAmount>
