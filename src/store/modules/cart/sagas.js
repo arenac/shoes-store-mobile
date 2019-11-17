@@ -36,6 +36,19 @@ function* addToCart({ id }) {
   }
 }
 
+function* updateAmount({ id, amount }) {
+  if (amount <= 0) {
+    return;
+  }
+  const stock = yield call(api.get, `/stock/${id}`);
+
+  if (amount > stock.data.amount) {
+    Alert.alert('Quanity requested not available!');
+    return;
+  }
+  yield put(updateAmountSuccess(id, amount));
+}
+
 export default all([
   takeLatest('@cart/ADD_REQUEST', addToCart),
   takeLatest('@cart/UPDATE_AMOUNT_REQUEST', updateAmount),
