@@ -59,7 +59,9 @@ const Cart = ({ cart, total, removeFromCart, updateAmount }) => {
                     />
                     <ProductDetails>
                       <Title>{product.title}</Title>
-                      <ProductSubtotal>{product.priceFormated}</ProductSubtotal>
+                      <ProductSubtotal>
+                        {product.priceFormatted}
+                      </ProductSubtotal>
                     </ProductDetails>
                     <DeleteProduct
                       onPress={() => handleDeleteProduct(product.id)}
