@@ -58,7 +58,7 @@ const Home = ({ addToCartRequest, amount }) => {
               />
               <Price>{item.priceFormated}</Price>
             </Header>
-            <AddButton onPress={() => handleAddProduct(item)}>
+            <AddButton onPress={() => handleAddProduct(item.id)}>
               <ProductAmount>
                 <Icon name="add-shopping-cart" size={20} color="#fff" />
                 <ProductAmountText>{amount[item.id] || 0}</ProductAmountText>
