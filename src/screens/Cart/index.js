@@ -30,17 +30,17 @@ import {
 
 import { formatPrice } from '../../utils/format';
 
-const Cart = ({ cart, total, removeFromCart, updateAmount }) => {
+const Cart = ({ cart, total, removeFromCart, updateAmountRequest }) => {
   const handleDeleteProduct = id => {
     removeFromCart(id);
   };
 
   const increment = product => {
-    updateAmount(product.id, product.amount + 1);
+    updateAmountRequest(product.id, product.amount + 1);
   };
 
   const decrement = product => {
-    updateAmount(product.id, product.amount - 1);
+    updateAmountRequest(product.id, product.amount - 1);
   };
 
   return (
